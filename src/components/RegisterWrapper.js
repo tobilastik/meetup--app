@@ -24,9 +24,7 @@ class Wrapper extends Component {
           {this.props.children}
 
         </View>
-        <View style={styles.copyrights}>
-          <Text style={styles.copyrightsTxt}>copyright © meetup.</Text>
-        </View>
+
       </SafeAreaView>
     );
   }

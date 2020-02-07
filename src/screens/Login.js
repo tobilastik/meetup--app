@@ -9,8 +9,17 @@ import {
 import Wrapper from '../components/Wrapper';
 import {colors} from '../utils/colos';
 import Gradient from '../components/Gradient';
+import {Feather} from '@expo/vector-icons';
 
 export default class Login extends Component {
+  state = {
+    showPassword: true,
+  };
+  handleShowPassword = () => {
+    this.setState ({
+      showPassword: !this.state.showPassword,
+    });
+  };
   render () {
     return (
       <Wrapper>
@@ -26,8 +35,20 @@ export default class Login extends Component {
             <TextInput style={styles.inputContainer} />
 
             <Text style={styles.loginTxt}>Pin</Text>
-            <TextInput style={styles.inputContainer} />
 
+            <View style={styles.passwordContainer}>
+              <TextInput
+                style={styles.inputStyle}
+                autoCorrect={false}
+                secureTextEntry={this.state.showPassword}
+                onChangeText={this.onPasswordEntry}
+              />
+              <TouchableOpacity onPress={this.handleShowPassword}>
+                {this.state.showPassword
+                  ? <Feather name="eye" color="#000" size={25} />
+                  : <Feather name="eye-off" color="#000" size={25} />}
+              </TouchableOpacity>
+            </View>
             <TouchableOpacity>
               <Text style={styles.forgotPin}>forgot your pin?</Text>
             </TouchableOpacity>
@@ -62,12 +83,13 @@ const styles = StyleSheet.create ({
     fontSize: 35,
     color: colors.primary,
     fontWeight: 'bold',
-    padding: 30,
+    paddingVertical: 20,
+    paddingHorizontal: 28,
   },
   loginTxt: {
     fontSize: 21,
     color: colors.primary,
-    marginTop: 6,
+    marginTop: 20,
   },
   txtContainer: {
     padding: 12,
@@ -76,12 +98,16 @@ const styles = StyleSheet.create ({
   inputContainer: {
     height: 58,
     borderWidth: 1.2,
-    borderColor: colors.primary,
+    borderColor: colors.border,
     borderRadius: 6,
+    top: 10,
+    marginBottom: 10,
+    padding: 10,
+    fontSize: 20,
   },
   forgotPin: {
     color: colors.secondary,
-    fontSize: 18,
+    fontSize: 20.5,
     position: 'absolute',
     right: 0,
     margin: 6,
@@ -93,6 +119,7 @@ const styles = StyleSheet.create ({
   },
   accountTxt: {
     fontSize: 22,
+    color: colors.primary,
   },
   signupTxt: {
     fontSize: 22,
@@ -102,5 +129,21 @@ const styles = StyleSheet.create ({
   pageTxt: {
     fontSize: 21,
     color: colors.primary,
+  },
+  passwordContainer: {
+    flexDirection: 'row',
+    borderColor: '#000',
+    paddingBottom: 10,
+    height: 58,
+    borderWidth: 1.2,
+    borderColor: colors.border,
+    borderRadius: 6,
+    top: 10,
+    marginBottom: 10,
+    padding: 10,
+    fontSize: 20,
+  },
+  inputStyle: {
+    flex: 1,
   },
 });
