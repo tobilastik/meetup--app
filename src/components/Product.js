@@ -56,16 +56,33 @@ class Product extends Component {
             }}
             source={item.image}
           />
-          <View style={{position: 'absolute'}}>
+          <View
+            style={{
+              position: 'absolute',
+              transform: [{rotate: '270deg'}],
+              backgroundColor: colors.black,
+              width: 60,
+              height: 30,
+              alignItems: 'center',
+              justifyContent: 'center',
+              top: 30,
+              left: -14,
+            }}
+          >
 
-            {this.state.fontLoaded
-              ? <Text style={{fontFamily: 'play-fair'}}>{item.name}</Text>
-              : null}
+            <Text style={{color: colors.white}}>{item.name}</Text>
+
           </View>
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <View>
               {this.state.fontLoaded
-                ? <Text style={{fontFamily: 'play-fair', fontSize: 22}}>
+                ? <Text
+                    style={{
+                      fontFamily: 'play-fair',
+                      fontSize: 22,
+                      color: 'gray',
+                    }}
+                  >
                     {item.desc}
                   </Text>
                 : null}
@@ -75,13 +92,14 @@ class Product extends Component {
                   style={{
                     fontSize: 18,
                     fontWeight: 'bold',
+                    color: colors.primary,
                   }}
                 >
                   ${item.price}
                 </Text>
                 <Text
                   style={{
-                    color: colors.secondary,
+                    color: colors.red,
                     fontSize: 18,
                     fontWeight: 'bold',
                   }}
@@ -90,7 +108,7 @@ class Product extends Component {
                 </Text>
               </View>
             </View>
-            <Ionicons name="md-more" size={30} />
+            <Ionicons name="md-more" size={39} color="gray" />
           </View>
 
         </View>

@@ -36,7 +36,8 @@ const styles = StyleSheet.create ({
   container: {
     flex: 1,
     padding: 12,
-    height: 900,
+    // height: 900,
+    backgroundColor: 'white',
   },
   wrapperImg: {
     height: 290,

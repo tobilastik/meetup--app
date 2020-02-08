@@ -67,7 +67,9 @@ export default class Login extends Component {
               }}
             >
               <Text style={styles.accountTxt}>Don't have an account?</Text>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate ('Register')}
+              >
                 <Text style={styles.signupTxt}>Sign up</Text>
               </TouchableOpacity>
             </View>

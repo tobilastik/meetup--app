@@ -1,16 +1,12 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import Wrapper from './src/components/Wrapper';
-import Register from './src/screens/Register';
-import Login from './src/screens/Login';
-import Introduction from './src/screens/Introduction';
-import Home from './src/screens/Home';
+import Navigation from './navigation/index';
 
 class App extends Component {
   render () {
     return (
       <View style={styles.container}>
-        <Home />
+        <Navigation />
       </View>
     );
   }

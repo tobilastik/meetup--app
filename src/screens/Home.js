@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
+import {View, ScrollView} from 'react-native';
 import Header from '../components/Header';
 import Select from '../components/Select';
 import Product from '../components/Product';
@@ -10,9 +10,9 @@ export default class Home extends Component {
       <View>
         <Header />
         <Select />
-        <View style={{top: 60}}>
+        <ScrollView style={{top: 60}}>
           <Product />
-        </View>
+        </ScrollView>
       </View>
     );
   }

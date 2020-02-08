@@ -89,7 +89,9 @@ export default class Register extends Component {
                 }}
               >
                 <Text style={styles.accountTxt}>Already have an account?</Text>
-                <TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => this.props.navigation.navigate ('Login')}
+                >
                   <Text style={styles.signupTxt}>Sign in</Text>
                 </TouchableOpacity>
               </View>
