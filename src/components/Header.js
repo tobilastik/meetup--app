@@ -5,10 +5,13 @@ import {
   SafeAreaView,
   StyleSheet,
   TouchableOpacity,
+  AsyncStorage,
 } from 'react-native';
 import {Ionicons, Feather} from '@expo/vector-icons';
 import * as Font from 'expo-font';
-export default class Home extends Component {
+import {withNavigation} from 'react-navigation';
+
+class Header extends Component {
   state = {
     fontLoaded: false,
   };
@@ -19,6 +22,10 @@ export default class Home extends Component {
     this.setState ({fontLoaded: true});
   }
 
+  handleLogout = () => {
+    AsyncStorage.removeItem ('id');
+    this.props.navigation.navigate ('Login');
+  };
   render () {
     return (
       <SafeAreaView style={styles.container}>
@@ -49,9 +56,12 @@ export default class Home extends Component {
               <View style={styles.iconList}>
                 <Ionicons name="ios-notifications-outline" size={34} />
               </View>
-              <View style={styles.iconList}>
-                <Feather name="shopping-bag" size={28} />
-              </View>
+              <TouchableOpacity
+                onPress={this.handleLogout}
+                style={styles.iconList}
+              >
+                <Feather name="power" size={28} />
+              </TouchableOpacity>
             </View>
           </View>
 
@@ -60,6 +70,8 @@ export default class Home extends Component {
     );
   }
 }
+
+export default withNavigation (Header);
 
 const styles = StyleSheet.create ({
   container: {

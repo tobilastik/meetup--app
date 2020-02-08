@@ -1,3 +1,3 @@
-const baseApi = 'https://reqres.in/api/';
+const baseApi = 'https://reqres.in/api';
 
 export default baseApi;
