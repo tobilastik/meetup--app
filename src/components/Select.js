@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
-import {Feather, Ionicons} from '@expo/vector-icons';
+import {Chevron} from 'react-native-shapes';
+import {Ionicons, SimpleLineIcons} from '@expo/vector-icons';
 
 const dress = [
   {
@@ -18,7 +19,7 @@ const dress = [
   },
 ];
 
-export default class Home extends Component {
+export default class Select extends Component {
   state = {
     dressCategory: '',
   };
@@ -33,7 +34,7 @@ export default class Home extends Component {
     return (
       <View>
         <View style={{flexDirection: 'row', top: 20}}>
-          <View style={{width: '90%', paddingHorizontal: 18}}>
+          <View style={{width: '85%', paddingHorizontal: 18}}>
             <RNPickerSelect
               placeholder={placeholder}
               items={dress}
@@ -41,26 +42,29 @@ export default class Home extends Component {
               style={{
                 ...pickerSelectStyles,
                 iconContainer: {
-                  top: 10,
-                  right: 12,
+                  top: 20,
+                  right: 18,
                 },
               }}
-              value={this.state.dressCategory}
+              value="Casual Dress"
               useNativeAndroidPickerStyle={false}
-              textInputProps={{underlineColor: 'yellow'}}
+              textInputProps={{
+                fontSize: 22,
+              }}
               Icon={() => {
-                return <Feather name="arrow-down" size={24} color="gray" />;
+                return <Chevron size={2} color="black" />;
               }}
             />
           </View>
           <TouchableOpacity
             style={{
-              backgroundColor: 'whitesmoke',
-              borderColor: 'gray',
-              borderWidth: 0.2,
+              backgroundColor: 'white',
+              borderColor: 'lightgray',
+              borderWidth: 0.9,
+              padding: 8,
             }}
           >
-            <Ionicons name="md-menu" size={40} />
+            <SimpleLineIcons name="equalizer" size={30} />
           </TouchableOpacity>
         </View>
       </View>
@@ -75,18 +79,15 @@ const pickerSelectStyles = StyleSheet.create ({
     paddingHorizontal: 10,
     borderWidth: 1,
     borderColor: 'gray',
-    borderRadius: 4,
     color: 'black',
     paddingRight: 30, // to ensure the text is never behind the icon
   },
   inputAndroid: {
     fontSize: 16,
     paddingHorizontal: 20,
-    borderBottomColor: 'gray',
     paddingVertical: 8,
-    borderWidth: 0.3,
-    borderColor: 'gray',
-    borderRadius: 8,
+    borderWidth: 0.9,
+    borderColor: 'lightgray',
     color: 'black',
     paddingRight: 30, // to ensure the text is never behind the icon
   },

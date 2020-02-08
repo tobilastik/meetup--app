@@ -3,9 +3,9 @@ import {
   View,
   Text,
   Image,
-  Dimensions,
   ScrollView,
   TouchableOpacity,
+  StyleSheet,
 } from 'react-native';
 import {data} from '../utils/data';
 import {Ionicons} from '@expo/vector-icons';
@@ -46,65 +46,26 @@ class Product extends Component {
     return data.map (item => {
       return (
         <View style={{margin: 20}} key={item.id}>
-          <Image
-            style={{
-              flex: 1,
-              alignSelf: 'stretch',
-              height: 260,
-              width: 200,
-              borderRadius: 10,
-            }}
-            source={item.image}
-          />
-          <View
-            style={{
-              position: 'absolute',
-              transform: [{rotate: '270deg'}],
-              backgroundColor: colors.black,
-              width: 60,
-              height: 30,
-              alignItems: 'center',
-              justifyContent: 'center',
-              top: 30,
-              left: -14,
-            }}
-          >
+          <Image style={styles.img} source={item.image} />
+          <View style={styles.nameTxt}>
 
             <Text style={{color: colors.white}}>{item.name}</Text>
 
           </View>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <View style={styles.productContainer}>
             <View>
               {this.state.fontLoaded
-                ? <Text
-                    style={{
-                      fontFamily: 'play-fair',
-                      fontSize: 22,
-                      color: 'gray',
-                    }}
-                  >
+                ? <Text style={styles.descTxt}>
                     {item.desc}
                   </Text>
                 : null}
 
               <View style={{flexDirection: 'row'}}>
-                <Text
-                  style={{
-                    fontSize: 18,
-                    fontWeight: 'bold',
-                    color: colors.primary,
-                  }}
-                >
+                <Text style={styles.priceTxt}>
                   ${item.price}
                 </Text>
-                <Text
-                  style={{
-                    color: colors.red,
-                    fontSize: 18,
-                    fontWeight: 'bold',
-                  }}
-                >
-                  {' '}{item.promo}{' '}
+                <Text style={styles.promoTxt}>
+                  {item.promo}
                 </Text>
               </View>
             </View>
@@ -136,14 +97,14 @@ class Product extends Component {
   renderSection () {
     if (this.state.activeIndex == 0) {
       return (
-        <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
+        <View style={styles.renderContainer}>
 
           {this.renderSectionOne ()}
         </View>
       );
     } else if (this.state.activeIndex == 1) {
       return (
-        <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
+        <View style={styles.renderContainer}>
 
           {this.renderSectionTwo ()}
         </View>
@@ -153,27 +114,11 @@ class Product extends Component {
 
   render () {
     return (
-      <ScrollView style={{}}>
+      <ScrollView>
         <View style={{flex: 1}}>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-            }}
-          >
+          <View style={styles.container}>
             <TouchableOpacity
-              style={[
-                this.state.activeIndex == 0
-                  ? {
-                      backgroundColor: colors.black,
-                      borderRadius: 8,
-                      width: 100,
-                      height: 50,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }
-                  : null,
-              ]}
+              style={[this.state.activeIndex == 0 ? styles.categories : null]}
               onPress={() => this.segmentClicked (0)}
               transparent
               active={this.state.activeIndex == 0}
@@ -184,8 +129,8 @@ class Product extends Component {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => this.segmentClicked (1)}
               transparent
+              style={{marginTop: 10}}
               active={this.state.activeIndex == 1}
             >
               <Text
@@ -199,28 +144,28 @@ class Product extends Component {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => this.segmentClicked (1)}
               transparent
+              style={{marginTop: 10}}
               active={this.state.activeIndex == 1}
             >
               <Text
                 style={[
                   {fontSize: 19},
-                  this.state.activeIndex == 1 ? {} : {color: 'grey'},
+                  this.state.activeIndex == 1 ? {} : {color: 'black'},
                 ]}
               >
                 Blazers
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => this.segmentClicked (1)}
               transparent
+              style={{marginTop: 10}}
               active={this.state.activeIndex == 1}
             >
               <Text
                 style={[
                   {fontSize: 19},
-                  this.state.activeIndex == 1 ? {} : {color: 'grey'},
+                  this.state.activeIndex == 1 ? {} : {color: 'black'},
                 ]}
               >
                 Jackets
@@ -234,3 +179,59 @@ class Product extends Component {
   }
 }
 export default Product;
+
+const styles = StyleSheet.create ({
+  img: {
+    flex: 1,
+    alignSelf: 'stretch',
+    height: 260,
+    width: 200,
+    borderRadius: 10,
+  },
+  nameTxt: {
+    position: 'absolute',
+    transform: [{rotate: '270deg'}],
+    backgroundColor: colors.black,
+    width: 60,
+    height: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    top: 30,
+    left: -14,
+  },
+  productContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  priceTxt: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: colors.primary,
+  },
+  promoTxt: {
+    color: colors.red,
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  descTxt: {
+    fontFamily: 'play-fair',
+    fontSize: 22,
+    color: 'gray',
+  },
+  renderContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  container: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  categories: {
+    backgroundColor: colors.black,
+    borderRadius: 8,
+    width: 100,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});

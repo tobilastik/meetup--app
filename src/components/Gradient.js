@@ -1,16 +1,18 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, TouchableOpacity} from 'react-native';
 import {LinearGradient} from 'expo-linear-gradient';
 
 export default class Gradient extends React.Component {
   render () {
+    const {children, ...props} = this.props;
     return (
-      <View
+      <TouchableOpacity
         style={{
           flex: 1,
           alignItems: 'center',
           paddingTop: 60,
         }}
+        {...props}
       >
         <LinearGradient
           colors={['#E73361', '#9A1675']}
@@ -23,9 +25,9 @@ export default class Gradient extends React.Component {
             justifyContent: 'center',
           }}
         >
-          {this.props.children}
+          {children}
         </LinearGradient>
-      </View>
+      </TouchableOpacity>
     );
   }
 }

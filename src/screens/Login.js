@@ -10,15 +10,26 @@ import Wrapper from '../components/Wrapper';
 import {colors} from '../utils/colos';
 import Gradient from '../components/Gradient';
 import {Feather} from '@expo/vector-icons';
+import {LinearGradient} from 'expo-linear-gradient';
 
 export default class Login extends Component {
-  state = {
-    showPassword: true,
-  };
+  constructor (props) {
+    super (props);
+
+    this.state = {
+      showPassword: true,
+    };
+    this.handleLogin = this.handleLogin.bind (this);
+  }
+
   handleShowPassword = () => {
     this.setState ({
       showPassword: !this.state.showPassword,
     });
+  };
+
+  handleLogin = () => {
+    alert ('hi');
   };
   render () {
     return (
@@ -31,8 +42,11 @@ export default class Login extends Component {
 
           </View>
           <View style={{marginHorizontal: 30, marginVertical: 19}}>
-            <Text style={styles.loginTxt}>Phone Number</Text>
-            <TextInput style={styles.inputContainer} />
+            <Text style={styles.loginTxt}>Email</Text>
+            <TextInput
+              keyboardType={'email-address'}
+              style={styles.inputContainer}
+            />
 
             <Text style={styles.loginTxt}>Pin</Text>
 
@@ -53,11 +67,28 @@ export default class Login extends Component {
               <Text style={styles.forgotPin}>forgot your pin?</Text>
             </TouchableOpacity>
 
-            <Gradient>
-              <Text style={styles.signinTxt}>
-                Sign in{' '}
-              </Text>
-            </Gradient>
+            <View style={{height: 80}} />
+            <TouchableOpacity
+              style={{backgroundColor: 'red'}}
+              onPress={() => this.props.navigation.navigate ('Home')}
+            >
+              <LinearGradient
+                colors={['#E73361', '#9A1675']}
+                style={{
+                  padding: 15,
+                  borderRadius: 5,
+                  width: '100%',
+                  height: 60,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Text style={styles.signinTxt}>
+                  Sign in{' '}
+                </Text>
+              </LinearGradient>
+
+            </TouchableOpacity>
 
             <View
               style={{

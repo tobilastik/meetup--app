@@ -7,13 +7,17 @@ import Product from '../components/Product';
 export default class Home extends Component {
   render () {
     return (
-      <View>
+      <ScrollView
+        style={{backgroundColor: 'white'}}
+        showsVerticalScrollIndicator={false}
+      >
         <Header />
         <Select />
-        <ScrollView style={{top: 60}}>
+        <View style={{top: 60}}>
           <Product />
-        </ScrollView>
-      </View>
+        </View>
+        <View style={{height: 120}} />
+      </ScrollView>
     );
   }
 }

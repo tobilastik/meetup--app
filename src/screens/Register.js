@@ -75,7 +75,7 @@ export default class Register extends Component {
                 />
               </TouchableOpacity>
 
-              <Gradient>
+              <Gradient onPress={() => this.props.navigation.navigate ('Home')}>
                 <Text style={styles.signinTxt}>
                   Register
                 </Text>

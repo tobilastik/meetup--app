@@ -7,8 +7,18 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {Ionicons, Feather} from '@expo/vector-icons';
-
+import * as Font from 'expo-font';
 export default class Home extends Component {
+  state = {
+    fontLoaded: false,
+  };
+  async componentDidMount () {
+    await Font.loadAsync ({
+      poppins: require ('../assets/fonts/Poppins-SemiBold.ttf'),
+    });
+    this.setState ({fontLoaded: true});
+  }
+
   render () {
     return (
       <SafeAreaView style={styles.container}>
@@ -17,11 +27,19 @@ export default class Home extends Component {
             <TouchableOpacity>
               <Ionicons name="md-menu" size={35} />
             </TouchableOpacity>
+            <View style={{left: 20}}>
+              {this.state.fontLoaded
+                ? <Text
+                    style={{
+                      fontFamily: 'poppins',
+                      fontSize: 30,
+                    }}
+                  >
+                    Meetup
+                  </Text>
+                : null}
 
-            <Text style={styles.meetup}>
-              Meetup
-            </Text>
-
+            </View>
             <View
               style={{flexDirection: 'row', justifyContent: 'space-around'}}
             >
