@@ -1,13 +1,5 @@
 import React, {Component} from 'react';
-import {
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-  StyleSheet,
-} from 'react-native';
+import {Text, View, Image, ScrollView, StyleSheet} from 'react-native';
 import RegisterWrapper from '../components/RegisterWrapper';
 import {colors} from '../utils/colos';
 import Gradient from '../components/Gradient';
@@ -31,20 +23,16 @@ export default class Introduction extends Component {
             </View>
 
             <View>
-              <Gradient>
-                <TouchableOpacity>
-                  <Text style={{fontSize: 22, color: 'white'}}>
-                    Skip Introduction
-                  </Text>
-                </TouchableOpacity>
+              <Gradient onPress={() => this.props.navigation.navigate ('Home')}>
+                <Text style={{fontSize: 22, color: 'white'}}>
+                  Skip Introduction
+                </Text>
+
               </Gradient>
             </View>
           </View>
 
         </RegisterWrapper>
-        <View style={styles.copyrights}>
-          <Text style={styles.copyrightsTxt}>copyright © meetup.</Text>
-        </View>
       </ScrollView>
     );
   }

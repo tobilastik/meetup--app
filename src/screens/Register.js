@@ -12,18 +12,96 @@ import {colors} from '../utils/colos';
 import Gradient from '../components/Gradient';
 import {Feather} from '@expo/vector-icons';
 import {CheckBox} from 'react-native-elements';
+import axios from 'axios';
+import baseApi from '../utils/baseApi';
 
 export default class Register extends Component {
   state = {
-    showPassword: true,
+    showPin: true,
+    showRetypePin: true,
     checked: true,
+    email: '',
+    pin: '',
+    emailError: '',
+    pinError: '',
+    retypePin: '',
   };
-  handleShowPassword = () => {
+  handleshowPin = () => {
     this.setState ({
-      showPassword: !this.state.showPassword,
+      showPin: !this.state.showPin,
     });
   };
+
+  handleShowRetypePin = () => {
+    this.setState ({
+      showRetypePin: !this.state.showRetypePin,
+    });
+  };
+
+  handleRegister = async () => {
+    const {pin, email, retypePin} = this.state;
+    this.setState ({
+      emailError: '',
+      pinError: '',
+    });
+    //User validation
+    if (email != '') {
+      if (this.validateEmail (email)) {
+        if (pin != '') {
+          if (pin.length == 5) {
+            if (pin === retypePin) {
+              if (this.state.checked) {
+                this.loginUsers ();
+              } else {
+                alert ('Agree to the terms and conditions');
+              }
+            } else {
+              this.setState ({
+                pinError: 'Pin must match!',
+              });
+            }
+          } else {
+            this.setState ({
+              pinError: 'Pin length should be 5 characters!',
+            });
+          }
+        } else {
+          this.setState ({pinError: 'Pin required!!!'});
+        }
+      } else {
+        this.setState ({emailError: 'Please enter a valid Email Address !'});
+      }
+    } else {
+      this.setState ({emailError: 'Email Address is required !'});
+    }
+  };
+
+  //Validate email with regex
+  validateEmail (email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test (String (email).toLowerCase ());
+  }
+
+  async loginUsers () {
+    const {email, pin} = this.state;
+    this.setState ({isLoading: true, emailError: '', pinError: ''});
+    await axios
+      .post (`${baseApi}/api/register`, {
+        email: email,
+        password: pin,
+      })
+      .then (({data}) => {
+        console.log (data.id);
+        AsyncStorage.setItem ('id', data.id);
+        this.props.navigation.navigate ('Congratulations');
+      })
+      .catch (({response}) => {
+        this.setState ({isLoading: false});
+      });
+  }
+
   render () {
+    const {emailError, pinError} = this.state;
     return (
       <ScrollView showsVerticalScrollIndicator={false}>
         <RegisterWrapper>
@@ -33,37 +111,138 @@ export default class Register extends Component {
               <Text style={styles.loginTxt}>Full Names</Text>
               <TextInput style={styles.inputContainer} />
 
-              <Text style={styles.loginTxt}>Phone Number</Text>
-              <TextInput style={styles.inputContainer} />
+              <View>
 
-              <Text style={styles.loginTxt}>Pin</Text>
-              <View style={styles.passwordContainer}>
-                <TextInput
-                  style={styles.inputStyle}
-                  autoCorrect={false}
-                  secureTextEntry={this.state.showPassword}
-                  onChangeText={this.onPasswordEntry}
-                />
-                <TouchableOpacity onPress={this.handleShowPassword}>
-                  {this.state.showPassword
-                    ? <Feather name="eye" color="#000" size={25} />
-                    : <Feather name="eye-off" color="#000" size={25} />}
-                </TouchableOpacity>
-              </View>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <Text
+                    style={[
+                      styles.loginTxt,
+                      emailError ? {color: 'red'} : null,
+                    ]}
+                  >
+                    Email
+                  </Text>
+                  {emailError != ''
+                    ? <View
+                        style={{
+                          position: 'absolute',
+                          right: 1,
+                        }}
+                      >
+                        <Text
+                          style={{
+                            color: 'red',
+                            marginTop: 30,
+                          }}
+                        >
+                          {emailError}
+                        </Text>
+                      </View>
+                    : null}
 
-              <Text style={styles.loginTxt}>Repeat Pin</Text>
-              <View style={styles.passwordContainer}>
+                </View>
+
                 <TextInput
-                  style={styles.inputStyle}
-                  autoCorrect={false}
-                  secureTextEntry={this.state.showPassword}
-                  onChangeText={this.onPasswordEntry}
+                  keyboardType={'email-address'}
+                  style={[
+                    styles.inputContainer,
+                    emailError ? {borderColor: 'red'} : null,
+                  ]}
+                  value={this.state.email}
+                  onChangeText={email => this.setState ({email})}
                 />
-                <TouchableOpacity onPress={this.handleShowPassword}>
-                  {this.state.showPassword
-                    ? <Feather name="eye" color="#000" size={25} />
-                    : <Feather name="eye-off" color="#000" size={25} />}
-                </TouchableOpacity>
+
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <Text
+                    style={[styles.loginTxt, pinError ? {color: 'red'} : null]}
+                  >
+                    Pin
+                  </Text>
+                  {pinError != ''
+                    ? <View
+                        style={{
+                          position: 'absolute',
+                          right: 1,
+                        }}
+                      >
+                        <Text
+                          style={{
+                            color: 'red',
+                            marginTop: 30,
+                          }}
+                        >
+                          {pinError}
+                        </Text>
+                      </View>
+                    : null}
+                </View>
+
+                <View
+                  style={[
+                    styles.passwordContainer,
+                    pinError ? {borderColor: 'red'} : null,
+                  ]}
+                >
+                  <TextInput
+                    style={[styles.inputStyle]}
+                    autoCorrect={false}
+                    secureTextEntry={this.state.showPin}
+                    value={this.state.pin}
+                    onChangeText={pin => this.setState ({pin})}
+                  />
+
+                  <TouchableOpacity onPress={this.handleshowPin}>
+                    {this.state.showPin
+                      ? <Feather name="eye" color="#000" size={25} />
+                      : <Feather name="eye-off" color="#000" size={25} />}
+                  </TouchableOpacity>
+                </View>
+
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <Text
+                    style={[styles.loginTxt, pinError ? {color: 'red'} : null]}
+                  >
+                    Retype Pin
+                  </Text>
+                  {pinError != ''
+                    ? <View
+                        style={{
+                          position: 'absolute',
+                          right: 1,
+                        }}
+                      >
+                        <Text
+                          style={{
+                            color: 'red',
+                            marginTop: 30,
+                          }}
+                        >
+                          {pinError}
+                        </Text>
+                      </View>
+                    : null}
+                </View>
+
+                <View
+                  style={[
+                    styles.passwordContainer,
+                    pinError ? {borderColor: 'red'} : null,
+                  ]}
+                >
+                  <TextInput
+                    style={[styles.inputStyle]}
+                    autoCorrect={false}
+                    secureTextEntry={this.state.showRetypePin}
+                    value={this.state.retypePin}
+                    onChangeText={retypePin => this.setState ({retypePin})}
+                  />
+
+                  <TouchableOpacity onPress={this.handleShowRetypePin}>
+                    {this.state.showRetypePin
+                      ? <Feather name="eye" color="#000" size={25} />
+                      : <Feather name="eye-off" color="#000" size={25} />}
+                  </TouchableOpacity>
+                </View>
               </View>
               <TouchableOpacity>
                 <CheckBox
@@ -75,7 +254,7 @@ export default class Register extends Component {
                 />
               </TouchableOpacity>
 
-              <Gradient onPress={() => this.props.navigation.navigate ('Home')}>
+              <Gradient onPress={this.handleRegister}>
                 <Text style={styles.signinTxt}>
                   Register
                 </Text>

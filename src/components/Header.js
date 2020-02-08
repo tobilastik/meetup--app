@@ -24,7 +24,9 @@ class Header extends Component {
 
   handleLogout = () => {
     AsyncStorage.removeItem ('id');
-    this.props.navigation.navigate ('Login');
+    setTimeout (() => {
+      this.props.navigation.navigate ('Login');
+    }, 100);
   };
   render () {
     return (

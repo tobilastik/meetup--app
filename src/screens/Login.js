@@ -78,7 +78,7 @@ export default class Login extends Component {
       .then (({data}) => {
         console.log (data.id);
         AsyncStorage.setItem ('id', data.id);
-        this.props.navigation.navigate ('Home');
+        this.props.navigation.navigate ('Introduction');
       })
       .catch (({response}) => {
         this.setState ({isLoading: false});
