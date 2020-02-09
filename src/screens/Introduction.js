@@ -4,39 +4,39 @@ import RegisterWrapper from '../components/RegisterWrapper';
 import {colors} from '../utils/colos';
 import Gradient from '../components/Gradient';
 
-export default class Introduction extends Component {
-  render () {
-    return (
-      <ScrollView style={styles.container}>
-        <RegisterWrapper>
-          <View style={{padding: 20, top: 30}}>
-            <View style={styles.imgWrapper}>
-              <Image
-                style={{width: 380, height: 250}}
-                source={require ('../assets/onboarding.png')}
-              />
-            </View>
-            <View>
-              <Text style={styles.introTxt}>
-                Connect with your business partners and associates using the new platform
-              </Text>
-            </View>
-
-            <View>
-              <Gradient onPress={() => this.props.navigation.navigate ('Home')}>
-                <Text style={{fontSize: 22, color: 'white'}}>
-                  Skip Introduction
-                </Text>
-
-              </Gradient>
-            </View>
+const Introduction = props => {
+  return (
+    <ScrollView style={styles.container}>
+      <RegisterWrapper>
+        <View style={{padding: 20, top: 30}}>
+          <View style={styles.imgWrapper}>
+            <Image
+              style={{width: 380, height: 250}}
+              source={require ('../assets/onboarding.png')}
+            />
+          </View>
+          <View>
+            <Text style={styles.introTxt}>
+              Connect with your business partners and associates using the new platform
+            </Text>
           </View>
 
-        </RegisterWrapper>
-      </ScrollView>
-    );
-  }
-}
+          <View>
+            <Gradient onPress={() => props.navigation.navigate ('Home')}>
+              <Text style={{fontSize: 22, color: 'white'}}>
+                Skip Introduction
+              </Text>
+
+            </Gradient>
+          </View>
+        </View>
+
+      </RegisterWrapper>
+    </ScrollView>
+  );
+};
+
+export default Introduction;
 
 const styles = StyleSheet.create ({
   container: {

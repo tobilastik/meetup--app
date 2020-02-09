@@ -187,7 +187,8 @@ export default class Login extends Component {
               onPress={this.handleLogin}
             >
               <LinearGradient
-                colors={['#E73361', '#9A1675']}
+                colors={['#9A1675', '#E73361']}
+                start={[0.7, 0.1]}
                 style={{
                   padding: 15,
                   borderRadius: 5,

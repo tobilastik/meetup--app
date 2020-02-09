@@ -22,6 +22,7 @@ class Product extends Component {
     };
   }
 
+  //Loading font before UI renders
   async componentDidMount () {
     await Font.loadAsync ({
       'play-fair': require ('../assets/fonts/PlayfairDisplay-Regular.ttf'),

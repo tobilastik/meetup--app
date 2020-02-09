@@ -1,13 +1,16 @@
+//Navigations
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 
-import Register from '../src/screens/Register';
-import Introduction from '../src/screens/Introduction';
-import Login from '../src/screens/Login';
-import Congratulations from '../src/screens/Congratulations';
-import Home from '../src/screens/Home';
-import Authloading from '../src/screens/Authloading';
+//Screens
+import Register from '../screens/Register';
+import Introduction from '../screens/Introduction';
+import Login from '../screens/Login';
+import Congratulations from '../screens/Congratulations';
+import Home from '../screens/Home';
+import Authloading from '../screens/Authloading';
 
+//Main App
 const AppStack = createStackNavigator (
   {
     Home,
@@ -20,6 +23,7 @@ const AppStack = createStackNavigator (
   }
 );
 
+//Authentication navigation
 const AuthStack = createStackNavigator (
   {
     Login,

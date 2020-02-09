@@ -15,6 +15,8 @@ class Header extends Component {
   state = {
     fontLoaded: false,
   };
+
+  //Loading font before UI renders
   async componentDidMount () {
     await Font.loadAsync ({
       poppins: require ('../assets/fonts/Poppins-SemiBold.ttf'),
@@ -22,6 +24,7 @@ class Header extends Component {
     this.setState ({fontLoaded: true});
   }
 
+  //Logout function and clearing of user id
   handleLogout = () => {
     AsyncStorage.removeItem ('id');
     setTimeout (() => {
@@ -49,9 +52,7 @@ class Header extends Component {
                 : null}
 
             </View>
-            <View
-              style={{flexDirection: 'row', justifyContent: 'space-around'}}
-            >
+            <View style={styles.iconContainer}>
               <View style={styles.iconList}>
                 <Ionicons name="ios-search" size={30} />
               </View>
@@ -92,5 +93,9 @@ const styles = StyleSheet.create ({
   },
   iconList: {
     marginHorizontal: 8,
+  },
+  iconContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
 });

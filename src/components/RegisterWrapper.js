@@ -1,36 +1,29 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Text, View, Image, StyleSheet, SafeAreaView} from 'react-native';
 import {colors} from '../utils/colos';
 
-class Wrapper extends Component {
-  render () {
-    return (
-      <SafeAreaView style={styles.container}>
-        <View style={{alignContent: 'flex-start'}}>
-          <View style={styles.logoWrapper}>
-            <Image
-              style={styles.logo1}
-              source={require ('../assets/logo.png')}
-            />
-            <Text style={styles.logoTxt}> meet</Text>
-            <Image style={styles.logo2} source={require ('../assets/up.png')} />
-          </View>
-          <Image
-            style={styles.wrapperImg}
-            source={require ('../assets/shape.png')}
-          />
+export default function (props) {
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={{alignContent: 'flex-start'}}>
+        <View style={styles.logoWrapper}>
+          <Image style={styles.logo1} source={require ('../assets/logo.png')} />
+          <Text style={styles.logoTxt}> meet</Text>
+          <Image style={styles.logo2} source={require ('../assets/up.png')} />
         </View>
-        <View style={{alignContent: 'flex-start'}}>
-          {this.props.children}
+        <Image
+          style={styles.wrapperImg}
+          source={require ('../assets/shape.png')}
+        />
+      </View>
+      <View style={{alignContent: 'flex-start'}}>
+        {props.children}
 
-        </View>
+      </View>
 
-      </SafeAreaView>
-    );
-  }
+    </SafeAreaView>
+  );
 }
-
-export default Wrapper;
 
 const styles = StyleSheet.create ({
   container: {

@@ -91,9 +91,8 @@ export default class Register extends Component {
         password: pin,
       })
       .then (({data}) => {
-        console.log (data.id);
-        AsyncStorage.setItem ('id', data.id);
         this.props.navigation.navigate ('Congratulations');
+        AsyncStorage.setItem ('id', data.id);
       })
       .catch (({response}) => {
         this.setState ({isLoading: false});

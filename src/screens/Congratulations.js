@@ -14,7 +14,7 @@ import {LinearGradient} from 'expo-linear-gradient';
 import baseApi from '../utils/baseApi';
 import axios from 'axios';
 
-export default class Login extends Component {
+export default class Congratulations extends Component {
   constructor (props) {
     super (props);
 
