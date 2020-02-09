@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   AsyncStorage,
+  ScrollView,
 } from 'react-native';
 import Wrapper from '../components/Wrapper';
 import {colors} from '../utils/colos';
@@ -88,8 +89,8 @@ export default class Login extends Component {
   render () {
     const {emailError, pinError} = this.state;
     return (
-      <Wrapper>
-        <View>
+      <ScrollView>
+        <Wrapper>
           <Text style={styles.helloTxt}>Hello!</Text>
           <View style={styles.txtContainer}>
             <Text style={styles.pageTxt}>please enter your</Text>
@@ -220,8 +221,8 @@ export default class Login extends Component {
               </TouchableOpacity>
             </View>
           </View>
-        </View>
-      </Wrapper>
+        </Wrapper>
+      </ScrollView>
     );
   }
 }

@@ -13,6 +13,7 @@ import {Feather} from '@expo/vector-icons';
 import {LinearGradient} from 'expo-linear-gradient';
 import baseApi from '../utils/baseApi';
 import axios from 'axios';
+import {ScrollView} from 'react-native-gesture-handler';
 
 export default class Congratulations extends Component {
   constructor (props) {
@@ -88,141 +89,147 @@ export default class Congratulations extends Component {
   render () {
     const {emailError, pinError} = this.state;
     return (
-      <Wrapper>
-        <View>
-          <Text style={styles.helloTxt}>Congratulations!</Text>
-          <View style={styles.txtContainer}>
-            <Text style={styles.pageTxt}>You have successfully registered</Text>
-            <Text style={styles.pageTxt}>
-              your account. You can now sign in{' '}
-            </Text>
-
-          </View>
-          <View style={{marginHorizontal: 30, marginVertical: 19}}>
-
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Text
-                style={[styles.loginTxt, emailError ? {color: 'red'} : null]}
-              >
-                Email
+      <ScrollView>
+        <Wrapper>
+          <View>
+            <Text style={styles.helloTxt}>Congratulations!</Text>
+            <View style={styles.txtContainer}>
+              <Text style={styles.pageTxt}>
+                You have successfully registered
               </Text>
-              {emailError != ''
-                ? <View
-                    style={{
-                      position: 'absolute',
-                      right: 1,
-                    }}
-                  >
-                    <Text
-                      style={{
-                        color: 'red',
-                        marginTop: 30,
-                      }}
-                    >
-                      {emailError}
-                    </Text>
-                  </View>
-                : null}
+              <Text style={styles.pageTxt}>
+                your account. You can now sign in{' '}
+              </Text>
 
             </View>
+            <View style={{marginHorizontal: 30, marginVertical: 19}}>
 
-            <TextInput
-              keyboardType={'email-address'}
-              style={[
-                styles.inputContainer,
-                emailError ? {borderColor: 'red'} : null,
-              ]}
-              value={this.state.email}
-              onChangeText={email => this.setState ({email})}
-            />
-
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Text style={[styles.loginTxt, pinError ? {color: 'red'} : null]}>
-                Pin
-              </Text>
-              {pinError != ''
-                ? <View
-                    style={{
-                      position: 'absolute',
-                      right: 1,
-                    }}
-                  >
-                    <Text
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <Text
+                  style={[styles.loginTxt, emailError ? {color: 'red'} : null]}
+                >
+                  Email
+                </Text>
+                {emailError != ''
+                  ? <View
                       style={{
-                        color: 'red',
-                        marginTop: 30,
+                        position: 'absolute',
+                        right: 1,
                       }}
                     >
-                      {pinError}
-                    </Text>
-                  </View>
-                : null}
-            </View>
+                      <Text
+                        style={{
+                          color: 'red',
+                          marginTop: 30,
+                        }}
+                      >
+                        {emailError}
+                      </Text>
+                    </View>
+                  : null}
 
-            <View
-              style={[
-                styles.passwordContainer,
-                pinError ? {borderColor: 'red'} : null,
-              ]}
-            >
+              </View>
+
               <TextInput
-                style={[styles.inputStyle]}
-                autoCorrect={false}
-                secureTextEntry={this.state.showPin}
-                value={this.state.pin}
-                onChangeText={pin => this.setState ({pin})}
+                keyboardType={'email-address'}
+                style={[
+                  styles.inputContainer,
+                  emailError ? {borderColor: 'red'} : null,
+                ]}
+                value={this.state.email}
+                onChangeText={email => this.setState ({email})}
               />
 
-              <TouchableOpacity onPress={this.handleshowPin}>
-                {this.state.showPin
-                  ? <Feather name="eye" color="#000" size={25} />
-                  : <Feather name="eye-off" color="#000" size={25} />}
-              </TouchableOpacity>
-            </View>
-            <TouchableOpacity>
-              <Text style={styles.forgotPin}>forgot your pin?</Text>
-            </TouchableOpacity>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <Text
+                  style={[styles.loginTxt, pinError ? {color: 'red'} : null]}
+                >
+                  Pin
+                </Text>
+                {pinError != ''
+                  ? <View
+                      style={{
+                        position: 'absolute',
+                        right: 1,
+                      }}
+                    >
+                      <Text
+                        style={{
+                          color: 'red',
+                          marginTop: 30,
+                        }}
+                      >
+                        {pinError}
+                      </Text>
+                    </View>
+                  : null}
+              </View>
 
-            <View style={{height: 80}} />
-            <TouchableOpacity
-              style={{backgroundColor: 'red'}}
-              onPress={this.handleLogin}
-            >
-              <LinearGradient
-                colors={['#E73361', '#9A1675']}
+              <View
+                style={[
+                  styles.passwordContainer,
+                  pinError ? {borderColor: 'red'} : null,
+                ]}
+              >
+                <TextInput
+                  style={[styles.inputStyle]}
+                  autoCorrect={false}
+                  secureTextEntry={this.state.showPin}
+                  value={this.state.pin}
+                  onChangeText={pin => this.setState ({pin})}
+                />
+
+                <TouchableOpacity onPress={this.handleshowPin}>
+                  {this.state.showPin
+                    ? <Feather name="eye" color="#000" size={25} />
+                    : <Feather name="eye-off" color="#000" size={25} />}
+                </TouchableOpacity>
+              </View>
+              <TouchableOpacity>
+                <Text style={styles.forgotPin}>forgot your pin?</Text>
+              </TouchableOpacity>
+
+              <View style={{height: 80}} />
+              <TouchableOpacity
+                style={{backgroundColor: 'red'}}
+                onPress={this.handleLogin}
+              >
+                <LinearGradient
+                  colors={['#E73361', '#9A1675']}
+                  style={{
+                    padding: 15,
+                    borderRadius: 5,
+                    width: '100%',
+                    height: 60,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <Text style={styles.signinTxt}>
+                    Sign in{' '}
+                  </Text>
+                </LinearGradient>
+
+              </TouchableOpacity>
+
+              <View
                 style={{
-                  padding: 15,
-                  borderRadius: 5,
-                  width: '100%',
-                  height: 60,
-                  alignItems: 'center',
+                  marginTop: 90,
+                  flexDirection: 'row',
                   justifyContent: 'center',
                 }}
               >
-                <Text style={styles.signinTxt}>
-                  Sign in{' '}
-                </Text>
-              </LinearGradient>
-
-            </TouchableOpacity>
-
-            <View
-              style={{
-                marginTop: 90,
-                flexDirection: 'row',
-                justifyContent: 'center',
-              }}
-            >
-              <Text style={styles.accountTxt}>Don't have an account?</Text>
-              <TouchableOpacity
-                onPress={() => this.props.navigation.navigate ('Register')}
-              >
-                <Text style={styles.signupTxt}>Sign up</Text>
-              </TouchableOpacity>
+                <Text style={styles.accountTxt}>Don't have an account?</Text>
+                <TouchableOpacity
+                  onPress={() => this.props.navigation.navigate ('Register')}
+                >
+                  <Text style={styles.signupTxt}>Sign up</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
-        </View>
-      </Wrapper>
+        </Wrapper>
+      </ScrollView>
     );
   }
 }

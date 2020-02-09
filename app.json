@@ -24,7 +24,14 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
-    }
+      "supportsTablet": true,
+      "bundleIdentifier": "com.enov8.meetup",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.enov8.meetup",
+      "versionCode": 1
+    },
+    "description": ""
   }
 }
