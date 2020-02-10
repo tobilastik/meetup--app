@@ -10,6 +10,8 @@ Apologies for the app size😀, had to use expo to quickly bootstrap it.
 
 # Link to the screenshots
 https://drive.google.com/open?id=1wlRO4gGhuQzqrfNqK1Adc7JQsvHAn0ex
+https://drive.google.com/open?id=1iTeIeMErMnBZ_P2I-pF9P15Bh527gdrJ
+
 
 
 # Notes
