@@ -9,7 +9,7 @@ Apologies for the app size😀, had to use expo to quickly bootstrap it.
 
 
 # Link to the screenshots
-
+https://drive.google.com/open?id=1wlRO4gGhuQzqrfNqK1Adc7JQsvHAn0ex
 
 
 # Notes
